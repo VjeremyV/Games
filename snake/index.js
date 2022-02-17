@@ -6,13 +6,15 @@ class SnakeBody{
     this.y = y;
   }
 }
-
+const restart = document.getElementById('restart');
+let bestScoreContainer = document.getElementById('best');
 const img = new Image();
 img.src = "./assets/grass.png";
-const snakeParts = [];
+let snakeParts = [];
 const gulp = new Audio('./assets/gulp.wav');
 const endSound = new Audio('./assets/gameover.wav');
 let tailLength = 2;
+
 let speed = 7;
 let tileCount = 20;
 let tileSize = canvas.width / tileCount -2;
@@ -23,7 +25,7 @@ let yShift = 0;
 let appleX = 5;
 let appleY = 5;
 let score = 0;
-
+let bestScore = 0;
 
 
 function runGame() {
@@ -68,6 +70,9 @@ if(gameOver){
   ctx.textAlign ="center";
   ctx.fillText(textGameover, (canvas.width / 2), canvas.height /2)
   endSound.play();
+
+  bestScore = Math.max(bestScore, score);
+  document.getElementById('best').innerText = bestScore;
 }
 return gameOver;
 
@@ -77,6 +82,7 @@ function increaseScore(){
   ctx.fillStyle = 'white';
   ctx.font ="1rem Verdana ";
   ctx.fillText("score : " + score, 10, 20)
+  
 }
 
 function clearScreen() {
@@ -162,4 +168,15 @@ function keyDown(e) {
   }
   
 }
+
+restart.addEventListener('click', () => {
+  tailLength = 2;
+  score = 0;
+  speed = 7;
+  snakeParts = [];
+  headX = 10;
+  headY = 10;
+  runGame()
+
+})
 runGame();
