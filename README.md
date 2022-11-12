@@ -1,6 +1,9 @@
 Titre : Games
+
 Objet : ensemble de petits jeux navigateur codés en Javascript
+
 Cadre : Personnel
+
 Début : Février 2022
 
 Objectifs : 
